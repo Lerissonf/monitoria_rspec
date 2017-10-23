@@ -1,0 +1,24 @@
+<table border="1" align="center">
+  <thead>
+  <tr>
+    <th>PLACA</th>
+    <th>MARCA</th>
+    <th>MODELO</th>
+    <th>CLIENTE</th>
+    <th>Excluir</th>
+  </tr>
+  </thead>
+  <tr>
+    <% @consulta.each do |f| %>
+    <%= form_for :carro, :action => carro_form_path do |j| %>
+    <td><%= f.placa %></td>
+    <td><%= f.marca %></td>
+    <td><%= f.modelo %></td>
+    <td><%= f.cliente %></td>
+    <td><%= link_to "Delete", carro_form_path(:placa => f.placa), method: "post", data: { confirm: "Tem certeza disso?" } %></td>
+    <% end %>
+  </tr>
+<% end %>
+Teste com sucesso de consulta dos carros existentes. Clique <a href='cardastro'> aqui </a> para voltar
+
+</table>

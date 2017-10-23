@@ -1,0 +1,28 @@
+<p><table border="1" align="center">
+  <thead>
+  <tr>
+    <th><strong>Placa</strong></th>
+    <th><strong>Valor</strong></th>
+    <th>Pago Em (AAAA/MM/DD)</th>
+    <th>CODIGO</th>
+    <th>EXCLUIR</th>
+  </tr>
+  </thead>
+  <tr>
+    <% @consulta.each do |f| %>
+    <%= form_for :pagamento, :action => pagamento_delete_path do |j| %>
+    <td><strong><%= f.placa %></strong></td>
+    <td><strong><%= f.valor%></strong></td>
+    <td><%= f.created_at %></td>
+    <td><%= f.id %></td>
+    <td><strong><%= link_to "Detete",  pagamento_delete_path(:id => f.id), method: "post", id: 'delete' %></strong></td>
+    </tr>
+    <% end %>
+  <% end %>
+  </table>
+ 
+
+
+Teste com sucesso de consulta dos pagamentos existentes. Clique <a href='pagreg'> aqui </a> para voltar<br>
+
+

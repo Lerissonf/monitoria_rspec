@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+<html>
+<style>
+    h1 {
+        text-align:center;
+    }
+    .leftbody{
+        text-align:left;
+    }
+</style>
+<body>
+<h1>Listando Revisões:</h1>
+ 
+<div style=position:absolute;margin-left:830px;margin-top:-50px;><table border="1">
+  <tr>
+    <th>Placa</th>
+    <th>Autorização</th>
+    <th>N° da Revisão</th>
+    <th>Detalhes</th>
+    <th>Deletar</th>
+  </tr>
+ 
+<% @listar.each do |list| %>
+  <tr>
+    <td><%= list.placa %></td>
+    <td><%= list.autorizacao %></td>
+    <td><%= list.n_rev.html_safe %></td>
+    <td><%= link_to "Detalhes",  revisao_detalhes_path(:id => list.id), method: "post", id: 'detalhes' %></td>
+    <td><%= link_to "Delete", revisao_delete_path(:id => list.id), method: "delete", data: { confirm: "Tem certeza disso?" } %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+<br>
+<br>
+
+<div class = "leftbody">
+    <fieldset style="float: left; width: 550px; background-color:black;">
+	<h2>Formulário de cadastro de Revisão</h2>
+    <%= form_for :revisao, :action => revisao_cadrev_path do |f| %>
+    <p class="name">
+        <%= f.select :placa, options_for_select(Carro.all.collect {|p| [p.placa]})  %>
+    </p>
+    <p class="name">
+        <label for="km">KM</label>
+        <%= f.text_field :km, :id=> "km_form" %>
+    </p>
+    <p class="text">
+        <label for="relatorio">Relatorio</label>
+        <%= f.text_area :relatorio, :id=> "relatorio_form" %>
+    </p>
+    <p class="name">
+        <label for="">Autorização</label>
+        <%= f.radio_button(:autorizacao, "Sim") %>
+        <%= label_tag(:age_child, "Sim") %>
+        <%= f.radio_button(:autorizacao, "Nao") %>
+        <%= label_tag(:age_adult, "Nao") %>
+    </p>    
+    <p class="submit">
+        <%= f.submit "Salvar Revisão", :id =>"submit_revisao"%>
+    </p>
+    </form>
+    <% end %></fieldset>
+
+</div>
+</body>
+</html>
